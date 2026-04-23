@@ -3,8 +3,6 @@
 
 StressLens is a real-time physiological stress detection system developed by Lider Teknoloji Gelistirme Ltd. Sti. for Virtual Reality (VR) environments. It combines biometric data from eye tracking and electrodermal activity (EDA/GSR) sensors with machine learning to provide immediate, non-invasive stress feedback to users during VR sessions. The platform is built on Unity and targets the HTC Vive Focus Vision headset.
 
-![StressLens VR HUD - Stress Warning](Assets/Screenshots/screenshot-20260410-085746.png)
-![StressLens Unity Editor View](Assets/Screenshots/screenshot-20260410-085123.png)
 
 ## Software Description
 
