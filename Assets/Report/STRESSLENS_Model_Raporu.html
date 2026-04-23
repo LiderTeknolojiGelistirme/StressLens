@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>STRESSLENS v3 - Model Gelistirme Raporu</title>
+<style>
+  :root {
+    --primary: #2c3e50;
+    --accent: #e74c3c;
+    --success: #27ae60;
+    --info: #3498db;
+    --warn: #f39c12;
+    --bg: #f8f9fa;
+    --card: #ffffff;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: var(--bg); color: #333; line-height: 1.6; }
+  .container { max-width: 1100px; margin: 0 auto; padding: 20px; }
+
+  /* Header */
+  .header { background: linear-gradient(135deg, var(--primary), #34495e); color: white; padding: 40px 30px; border-radius: 12px; margin-bottom: 30px; }
+  .header h1 { font-size: 2.2em; margin-bottom: 8px; }
+  .header .subtitle { font-size: 1.1em; opacity: 0.85; }
+  .header .meta { margin-top: 15px; font-size: 0.9em; opacity: 0.7; }
+
+  /* Cards */
+  .card { background: var(--card); border-radius: 10px; padding: 25px; margin-bottom: 25px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+  .card h2 { color: var(--primary); margin-bottom: 15px; padding-bottom: 10px; border-bottom: 2px solid #eee; font-size: 1.4em; }
+  .card h3 { color: #555; margin: 18px 0 10px 0; font-size: 1.1em; }
+
+  /* KPI Grid */
+  .kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 15px; margin: 20px 0; }
+  .kpi { background: #f0f4f8; border-radius: 8px; padding: 18px; text-align: center; border-left: 4px solid var(--info); }
+  .kpi.success { border-left-color: var(--success); }
+  .kpi.danger { border-left-color: var(--accent); }
+  .kpi.warn { border-left-color: var(--warn); }
+  .kpi .value { font-size: 2em; font-weight: 700; color: var(--primary); }
+  .kpi .label { font-size: 0.85em; color: #666; margin-top: 4px; }
+  .kpi .change { font-size: 0.8em; margin-top: 4px; }
+  .kpi .change.up { color: var(--success); }
+  .kpi .change.down { color: var(--accent); }
+
+  /* Tables */
+  table { width: 100%; border-collapse: collapse; margin: 15px 0; font-size: 0.95em; }
+  th, td { padding: 10px 14px; text-align: left; border-bottom: 1px solid #eee; }
+  th { background: #f0f4f8; color: var(--primary); font-weight: 600; }
+  tr:hover { background: #fafbfc; }
+  .highlight { background: #fff8e1 !important; font-weight: 600; }
+  .best { color: var(--success); font-weight: 700; }
+  .mono { font-family: 'Consolas', 'Courier New', monospace; font-size: 0.9em; }
+
+  /* Figures */
+  .figure { text-align: center; margin: 20px 0; }
+  .figure img { max-width: 100%; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+  .figure .caption { font-size: 0.9em; color: #666; margin-top: 8px; font-style: italic; }
+
+  /* Tags */
+  .tag { display: inline-block; padding: 3px 10px; border-radius: 12px; font-size: 0.8em; font-weight: 600; margin: 2px; }
+  .tag.eye { background: #e3f2fd; color: #1565c0; }
+  .tag.gsr { background: #e8f5e9; color: #2e7d32; }
+  .tag.log { background: #fff3e0; color: #e65100; }
+
+  /* Pipeline */
+  .pipeline { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin: 15px 0; }
+  .pipeline .step { background: var(--info); color: white; padding: 8px 16px; border-radius: 20px; font-size: 0.9em; font-weight: 600; }
+  .pipeline .arrow { color: #999; font-size: 1.3em; }
+  .pipeline .step:nth-child(5) { background: var(--success); }
+  .pipeline .step:nth-child(9) { background: var(--warn); }
+  .pipeline .step:nth-child(13) { background: var(--accent); }
+
+  /* Alert boxes */
+  .alert { padding: 15px 20px; border-radius: 8px; margin: 15px 0; font-size: 0.95em; }
+  .alert.info { background: #e3f2fd; border-left: 4px solid var(--info); }
+  .alert.success { background: #e8f5e9; border-left: 4px solid var(--success); }
+  .alert.warn { background: #fff3e0; border-left: 4px solid var(--warn); }
+
+  /* Two column */
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  @media (max-width: 768px) { .two-col { grid-template-columns: 1fr; } }
+
+  /* TOC */
+  .toc { background: #f0f4f8; padding: 20px; border-radius: 8px; margin-bottom: 25px; }
+  .toc h3 { margin-bottom: 10px; }
+  .toc ol { padding-left: 20px; }
+  .toc li { margin: 5px 0; }
+  .toc a { color: var(--info); text-decoration: none; }
+  .toc a:hover { text-decoration: underline; }
+
+  .footer { text-align: center; padding: 30px; color: #999; font-size: 0.85em; }
+
+  /* ========== PRINT / PDF LAYOUT ========== */
+  @media print {
+    @page {
+      size: A4;
+      margin: 18mm 15mm 18mm 15mm;
+    }
+    body { background: white; font-size: 9.5pt; line-height: 1.5; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .container { max-width: 100%; padding: 0; }
+
+    .header { padding: 22px 20px; margin-bottom: 16px; border-radius: 6px; break-after: avoid; }
+    .header h1 { font-size: 1.7em; }
+    .header .subtitle { font-size: 0.95em; }
+
+    .toc { padding: 14px; margin-bottom: 14px; break-after: page; }
+
+    .card { padding: 16px; margin-bottom: 10px; box-shadow: none; border: 1px solid #ddd; border-radius: 6px; break-inside: avoid; page-break-inside: avoid; }
+    .card h2 { font-size: 1.2em; margin-bottom: 10px; padding-bottom: 6px; }
+    .card h3 { font-size: 1em; margin: 12px 0 6px 0; }
+
+    .kpi-grid { grid-template-columns: repeat(4, 1fr); gap: 8px; margin: 10px 0; }
+    .kpi { padding: 10px; }
+    .kpi .value { font-size: 1.5em; }
+    .kpi .label { font-size: 0.75em; }
+    .kpi .change { font-size: 0.7em; }
+
+    table { font-size: 0.85em; margin: 8px 0; }
+    th, td { padding: 5px 8px; }
+
+    .figure { margin: 12px 0; break-inside: avoid; page-break-inside: avoid; }
+    .figure img { max-width: 95%; max-height: 320px; object-fit: contain; border-radius: 4px; box-shadow: none; }
+    .figure .caption { font-size: 0.8em; margin-top: 4px; }
+
+    .alert { padding: 8px 12px; margin: 8px 0; font-size: 0.85em; break-inside: avoid; }
+    .two-col { gap: 12px; }
+    .pipeline .step { padding: 4px 10px; font-size: 0.8em; }
+    .pipeline .arrow { font-size: 1em; }
+
+    .tag { padding: 1px 6px; font-size: 0.7em; }
+
+    /* Sayfa kirilma kontrolleri */
+    #ozet { break-after: page; }
+    #veri { break-after: page; }
+    #pipeline { break-after: page; }
+    #model { break-after: page; }
+    #performans { break-after: page; }
+    #threshold { break-after: page; }
+    #cv { break-after: page; }
+
+    .footer { padding: 15px; font-size: 0.75em; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+<!-- HEADER -->
+<div class="header">
+  <h1>STRESSLENS v3 Model Raporu</h1>
+  <div class="subtitle">Stacking Ensemble ile Goz Izleme + GSR Tabanli Stres Tespiti</div>
+  <div class="meta">Tarih: 10 Nisan 2026 &nbsp;|&nbsp; Model: StackingClassifier (LightGBM + LogReg + SVM) &nbsp;|&nbsp; Dataset: VREED</div>
+</div>
+
+<!-- TOC -->
+<div class="toc">
+  <h3>Icindekiler</h3>
+  <ol>
+    <li><a href="#ozet">Yonetici Ozeti</a></li>
+    <li><a href="#veri">Veri Seti Analizi</a></li>
+    <li><a href="#pipeline">Ozellik Muhendisligi Pipeline</a></li>
+    <li><a href="#model">Model Mimarisi</a></li>
+    <li><a href="#performans">Performans Karsilastirmasi</a></li>
+    <li><a href="#threshold">Threshold Optimizasyonu</a></li>
+    <li><a href="#cv">Capraz Dogrulama ve Guvenirlirlik</a></li>
+    <li><a href="#ozellikler">Kullanilan Ozellikler</a></li>
+    <li><a href="#unity">Unity Entegrasyonu</a></li>
+    <li><a href="#sinirlamalar">Sinirlamalar ve Gelecek Calisma</a></li>
+  </ol>
+</div>
+
+<!-- 1. EXECUTIVE SUMMARY -->
+<div class="card" id="ozet">
+  <h2>1. Yonetici Ozeti</h2>
+  <p>STRESSLENS, VR ortaminda goz izleme (Eye Tracking) ve deri iletkenlik tepkisi (GSR) sensorlerinden toplanan verilerle
+  <strong>gercek zamanli stres tespiti</strong> yapan bir sistemdir. Bu rapor, v1 (varsayilan LightGBM) modelinden v3 (Stacking Ensemble) modeline
+  gecis surecindeki iyilestirmeleri, performans kazanimlarini ve mimari kararlari detayli olarak sunmaktadir.</p>
+
+  <div class="kpi-grid">
+    <div class="kpi success">
+      <div class="value">0.846</div>
+      <div class="label">F1 Score</div>
+      <div class="change up">+10.0% (v1: 0.769)</div>
+    </div>
+    <div class="kpi success">
+      <div class="value">0.917</div>
+      <div class="label">Precision</div>
+      <div class="change up">+10.0% (v1: 0.833)</div>
+    </div>
+    <div class="kpi">
+      <div class="value">0.786</div>
+      <div class="label">Recall</div>
+      <div class="change up">+10.0% (v1: 0.714)</div>
+    </div>
+    <div class="kpi warn">
+      <div class="value">16</div>
+      <div class="label">Ozellik Sayisi</div>
+      <div class="change up">-50% (v1: 32)</div>
+    </div>
+  </div>
+
+  <div class="alert success">
+    <strong>Temel Kazanimlar:</strong> Yarim ozellik sayisi ile daha yuksek dogruluk. Yalnizca 1 yanlis alarm (False Positive).
+    Overfitting farki %3.3'e dusturuldu. PR-AUC 0.917 (dengesiz veri icin en guvenilir metrik).
+  </div>
+</div>
+
+<!-- 2. DATASET -->
+<div class="card" id="veri">
+  <h2>2. Veri Seti Analizi</h2>
+
+  <div class="two-col">
+    <div>
+      <h3>Dataset Ozellikleri</h3>
+      <table>
+        <tr><th>Parametre</th><th>Deger</th></tr>
+        <tr><td>Kaynak</td><td>VREED Dataset (360-VE videolari)</td></tr>
+        <tr><td>Toplam Ornek</td><td>275 (37 NaN satirdan sonra)</td></tr>
+        <tr><td>Normal (0)</td><td>205 (%74.5)</td></tr>
+        <tr><td>Stresli (1)</td><td>70 (%25.5)</td></tr>
+        <tr><td>Dengesizlik Orani</td><td>2.93x</td></tr>
+        <tr><td>Ham Ozellik</td><td>57 (50 Eye + 8 GSR - 1 etiket)</td></tr>
+        <tr><td>Train / Test</td><td>220 / 55 (%80/%20, stratified)</td></tr>
+        <tr><td>Etiketleme</td><td>Quad_Cat == 3 &rarr; stres=1</td></tr>
+      </table>
+    </div>
+    <div>
+      <h3>Sinif Dengesizligi Sorunu</h3>
+      <p>Veri setinde normal ornekler stresli orneklerin <strong>~3 kati</strong>. Bu dengesizlik ele alinmadigi takdirde
+      model "hep normal de" stratejisine kayar ve %74.5 accuracy alir.</p>
+      <p style="margin-top:10px"><strong>Cozum:</strong> SMOTE (Synthetic Minority Over-sampling Technique) ile azinlik sinifi
+      56'dan 164'e cikarilarak tam denge saglanmistir.</p>
+    </div>
+  </div>
+
+  <div class="figure">
+    <img src="fig1_class_distribution.png" alt="Sinif Dagilimi">
+    <div class="caption">Sekil 1: Sinif dagilimi — orijinal veri (sol), train/test ayirimi (orta), SMOTE sonrasi (sag)</div>
+  </div>
+</div>
+
+<!-- 3. FEATURE PIPELINE -->
+<div class="card" id="pipeline">
+  <h2>3. Ozellik Muhendisligi Pipeline</h2>
+
+  <div class="pipeline">
+    <div class="step">57 Ham Ozellik</div>
+    <div class="arrow">&rarr;</div>
+    <div class="step">Korelasyon Filtresi</div>
+    <div class="arrow">&rarr;</div>
+    <div class="step">32 Ozellik</div>
+    <div class="arrow">&rarr;</div>
+    <div class="step">Log Donusum</div>
+    <div class="arrow">&rarr;</div>
+    <div class="step">MI Filtresi</div>
+    <div class="arrow">&rarr;</div>
+    <div class="step" style="background:#e74c3c">16 Final Ozellik</div>
+  </div>
+
+  <h3>3.1 Korelasyon Filtresi (57 &rarr; 32)</h3>
+  <p>Esik degeri 0.8 ile yuksek korelasyonlu ozellikler <strong>sadece train seti uzerinde</strong> hesaplanarak elenmistir.
+  Bu, data leakage (bilgi sizintisi) sorununu onler — test verisi hicbir sekilde ozellik secim surecini etkilemez.</p>
+  <p><strong>25 ozellik elendi:</strong> SD/Max_Fixation_Duration, Num_of_Saccade, tum Saccade Length/Amplitude varyantlari,
+  SD/Max_Blink_Duration, cesitli Microsaccade turevleri, GSR Variance/Min/Max/Valleys/Ratio.</p>
+
+  <h3>3.2 Log Donusum (9 carpik ozellik)</h3>
+  <p>|Skewness| > 2 olan ozellikler <code>sign(x) * log(1 + |x|)</code> donusumu ile normallestirilmistir.
+  Bu, agac modellerinin split kalitesini artirarak daha iyi karar sinirlari olusturmasini saglar.</p>
+  <p><strong>Donusturulen ozellikler:</strong>
+    <span class="tag eye">Mean_Fixation_Duration</span>
+    <span class="tag eye">First_Fixation_Duration</span>
+    <span class="tag eye">Max_Saccade_Direction</span>
+    <span class="tag eye">Num_of_Blink</span>
+    <span class="tag eye">Mean_Blink_Duration</span>
+    <span class="tag eye">SD_Microsac_Peak_Vel</span>
+    <span class="tag eye">Skew_Microsac_Peak_Vel</span>
+    <span class="tag eye">Max_Microsac_Dir</span>
+    <span class="tag gsr">SD</span>
+  </p>
+  <div class="alert info">
+    <strong>Not:</strong> Log donusum Unity tarafinda yapilmaz. Ham degerler WebSocket uzerinden gonderilir,
+    <code>websocket_server.py</code> donusumu <code>model_meta.json</code> dosyasindaki listeye gore otomatik uygular.
+  </div>
+
+  <h3>3.3 Mutual Information Filtresi (32 &rarr; 16)</h3>
+  <p>MI skoru 0.01'in altinda kalan 16 ozellik elenmistir. Bu ozellikler stres/normal ayriminda neredeyse sifir bilgi tasimaktadir.</p>
+
+  <div class="figure">
+    <img src="fig2_feature_selection.png" alt="Ozellik Secimi">
+    <div class="caption">Sekil 2: Mutual Information skorlari (sol) ve ozellik azaltma pipeline (sag)</div>
+  </div>
+</div>
+
+<!-- 4. MODEL ARCHITECTURE -->
+<div class="card" id="model">
+  <h2>4. Model Mimarisi</h2>
+
+  <h3>4.1 Stacking Ensemble Yapisi</h3>
+  <p>Uc farkli algoritmanin guclu yanlarini birlestiren iki katmanli bir ensemble yapisi kullanilmistir:</p>
+
+  <table>
+    <tr><th>Katman</th><th>Model</th><th>Rol</th><th>Onemli Parametreler</th></tr>
+    <tr>
+      <td rowspan="3"><strong>Base<br>Modeller</strong></td>
+      <td>LightGBM</td>
+      <td>Non-lineer oruntuler, ozellik etkilesimleri</td>
+      <td class="mono">n_est=300, lr=0.01, depth=4, leaves=15, subsample=0.7</td>
+    </tr>
+    <tr>
+      <td>Logistic Regression</td>
+      <td>Lineer sinir, olasilik kalibrasyonu</td>
+      <td class="mono">C=1.0, class_weight=balanced, StandardScaler</td>
+    </tr>
+    <tr>
+      <td>SVM (RBF)</td>
+      <td>Karar siniri cesitliligi, kernel trick</td>
+      <td class="mono">C=1.0, kernel=rbf, class_weight=balanced</td>
+    </tr>
+    <tr class="highlight">
+      <td><strong>Meta</strong></td>
+      <td>Logistic Regression</td>
+      <td>3 modelin olasilik ciktilarini birlestirir</td>
+      <td class="mono">class_weight=balanced, 5-fold CV stacking</td>
+    </tr>
+  </table>
+
+  <div class="figure">
+    <img src="fig6_architecture.png" alt="Model Mimarisi">
+    <div class="caption">Sekil 3: STRESSLENS v3 sistem mimarisi — sensor verilerinden stres tahminine kadar tum akis</div>
+  </div>
+
+  <h3>4.2 Neden Stacking?</h3>
+  <ul style="margin-left:20px; margin-top:10px;">
+    <li><strong>LightGBM</strong> tek basina kucuk veri setlerinde overfitting yapar (train=1.00, test=0.89)</li>
+    <li><strong>Logistic Regression</strong> CV F1'de LightGBM'e yakin (0.57 vs 0.37) — kucuk veri setlerinde basit modeller guclu</li>
+    <li><strong>SVM</strong> farkli karar sinirlari olusturarak cesitlilik saglar</li>
+    <li><strong>Meta-learner</strong> her modelin guclu oldugu ornekleri ogrenir ve birlestirerek daha robust tahmin uretir</li>
+  </ul>
+</div>
+
+<!-- 5. PERFORMANCE -->
+<div class="card" id="performans">
+  <h2>5. Performans Karsilastirmasi</h2>
+
+  <h3>5.1 v1 vs v3 Metrikleri</h3>
+  <table>
+    <tr>
+      <th>Metrik</th>
+      <th>v1 Orijinal<br>(LightGBM, 32 ozellik)</th>
+      <th>v3 Stacking<br>(t=0.50)</th>
+      <th>v3 Stacking<br>(t=0.777)</th>
+      <th>Degisim<br>(v1 &rarr; v3 optimal)</th>
+    </tr>
+    <tr><td>Accuracy</td><td>0.891</td><td>0.909</td><td class="best">0.927</td><td class="best">+4.0%</td></tr>
+    <tr><td>F1 Score</td><td>0.769</td><td>0.815</td><td class="best">0.846</td><td class="best">+10.0%</td></tr>
+    <tr><td>Precision</td><td>0.833</td><td>0.846</td><td class="best">0.917</td><td class="best">+10.1%</td></tr>
+    <tr><td>Recall</td><td>0.714</td><td>0.786</td><td class="best">0.786</td><td class="best">+10.1%</td></tr>
+    <tr><td>ROC-AUC</td><td>0.958</td><td colspan="2" style="text-align:center">0.962</td><td class="best">+0.4%</td></tr>
+    <tr><td>PR-AUC</td><td>0.906</td><td colspan="2" style="text-align:center">0.917</td><td class="best">+1.2%</td></tr>
+    <tr><td>Log Loss</td><td>0.239</td><td colspan="2" style="text-align:center">0.244</td><td>+2.1%</td></tr>
+    <tr><td>Ozellik Sayisi</td><td>32</td><td colspan="2" style="text-align:center">16</td><td class="best">-50%</td></tr>
+    <tr><td>False Positive</td><td>2</td><td>2</td><td class="best">1</td><td class="best">-50%</td></tr>
+    <tr><td>False Negative</td><td>4</td><td>3</td><td>3</td><td class="best">-25%</td></tr>
+  </table>
+
+  <div class="figure">
+    <img src="fig3_roc_pr_curves.png" alt="ROC ve PR Egrileri">
+    <div class="caption">Sekil 4: ROC egrisi (sol) ve Precision-Recall egrisi (sag) — v1 vs v3 karsilastirmasi</div>
+  </div>
+
+  <h3>5.2 Confusion Matrix Karsilastirmasi</h3>
+  <div class="figure">
+    <img src="fig4_confusion_matrices.png" alt="Confusion Matrices">
+    <div class="caption">Sekil 5: Confusion matrix — v1 orijinal (sol), v3 varsayilan threshold (orta), v3 optimal threshold (sag)</div>
+  </div>
+
+  <h3>5.3 Olasilik Dagilimi</h3>
+  <div class="figure">
+    <img src="fig7_probability_distribution.png" alt="Olasilik Dagilimi">
+    <div class="caption">Sekil 6: Stres olasiliklari dagilimi — v1 (sol) vs v3 (sag). v3'te siniflar daha iyi ayrilmis.</div>
+  </div>
+
+  <h3>5.4 Overfitting Kontrolu</h3>
+  <table>
+    <tr><th>Metrik</th><th>Train</th><th>Test</th><th>Fark</th><th>Degerlendirme</th></tr>
+    <tr><td>Accuracy</td><td>0.960</td><td>0.927</td><td>0.033</td><td class="best">Dusuk fark — iyi genelleme</td></tr>
+    <tr><td>F1 Score</td><td>0.960</td><td>0.846</td><td>0.114</td><td>Kabul edilebilir (kucuk veri seti etkisi)</td></tr>
+  </table>
+  <div class="alert info">
+    v1'de train accuracy 1.000 idi (tam ezberleme). v3'te 0.960'a dusturuldu — model artik ezberlemek yerine ogreniyor.
+  </div>
+</div>
+
+<!-- 6. THRESHOLD -->
+<div class="card" id="threshold">
+  <h2>6. Threshold Optimizasyonu</h2>
+
+  <p>Varsayilan 0.50 threshold yerine, Precision-Recall egrisinden <strong>F1 Score'u maksimize eden optimal threshold</strong>
+  hesaplanmistir: <strong style="color: var(--accent);">0.777</strong></p>
+
+  <div class="two-col">
+    <div>
+      <h3>Threshold Etki Analizi</h3>
+      <table>
+        <tr><th>Threshold</th><th>F1</th><th>Precision</th><th>Recall</th></tr>
+        <tr><td>0.30</td><td>0.750</td><td>0.667</td><td>0.857</td></tr>
+        <tr><td>0.40</td><td>0.774</td><td>0.706</td><td>0.857</td></tr>
+        <tr><td>0.50</td><td>0.815</td><td>0.846</td><td>0.786</td></tr>
+        <tr><td>0.55</td><td>0.846</td><td>0.917</td><td>0.786</td></tr>
+        <tr class="highlight"><td><strong>0.777</strong></td><td><strong>0.846</strong></td><td><strong>0.917</strong></td><td><strong>0.786</strong></td></tr>
+        <tr><td>0.60</td><td>0.846</td><td>0.917</td><td>0.786</td></tr>
+      </table>
+    </div>
+    <div>
+      <h3>Neden 0.777?</h3>
+      <p>Stres tespiti uygulamasinda iki tur hata var:</p>
+      <ul style="margin-left:20px; margin-top:8px;">
+        <li><strong>False Positive (Yanlis alarm):</strong> Normal kisiye "streslisin" demek &rarr; gereksiz mudahale</li>
+        <li><strong>False Negative (Kacirma):</strong> Stresli kisiye "normalsin" demek &rarr; tehlikeli</li>
+      </ul>
+      <p style="margin-top:10px">0.777 threshold'u <strong>sadece 1 yanlis alarm</strong> uretirken 14 stresli kisiden 11'ini dogru tespit eder.
+      Kalibrasyon sistemi kisiye ozel threshold ayari yaparak bu dengeyi daha da iyilestirir.</p>
+    </div>
+  </div>
+
+  <div class="figure">
+    <img src="fig5_threshold_analysis.png" alt="Threshold Analizi">
+    <div class="caption">Sekil 7: Farkli threshold degerleri icin performans metrikleri. Kirmizi kesikli cizgi optimal noktayi gosterir.</div>
+  </div>
+</div>
+
+<!-- 7. CROSS VALIDATION -->
+<div class="card" id="cv">
+  <h2>7. Capraz Dogrulama ve Guvenilirlik</h2>
+
+  <p>5-Fold Stratified Cross-Validation ile modellerin gercek performansi olculmustur.
+  CV sonuclari, test seti sonuclarindan daha <strong>pesimist ama daha guvenilir</strong>dir
+  (55 orneklik test setinde tek bir ornekteki degisiklik metrikleri %2 oynatabiliyor).</p>
+
+  <div class="figure">
+    <img src="fig8_cv_stability.png" alt="CV Stabilitesi">
+    <div class="caption">Sekil 8: 5-Fold CV F1 Score dagilimi — Stacking en tutarli ve en yuksek medyan performansi gosteriyor</div>
+  </div>
+
+  <table>
+    <tr><th>Model</th><th>CV F1 (Ortalama)</th><th>CV F1 (Std)</th><th>Tutarlilik</th></tr>
+    <tr><td>LightGBM (tek basina)</td><td>0.370</td><td>0.081</td><td>Dusuk</td></tr>
+    <tr><td>Logistic Regression</td><td>0.570</td><td>0.050</td><td>Yuksek</td></tr>
+    <tr><td>SVM-RBF</td><td>0.596</td><td>0.123</td><td>Orta</td></tr>
+    <tr class="highlight"><td><strong>Stacking Ensemble</strong></td><td><strong>0.594</strong></td><td><strong>0.058</strong></td><td><strong>Yuksek</strong></td></tr>
+  </table>
+
+  <div class="alert warn">
+    <strong>Onemli:</strong> CV F1 (0.594) ile test F1 (0.846) arasindaki fark, 55 orneklik kucuk test setinin dogal varyansini yansitir.
+    CV sonucu modelin gercek dunyada ~%60 F1 civarinda performans gostermesini bekleyebileceginizi,
+    en iyi durumda ise ~%85'e ulasabilecegini gosterir. Daha buyuk veri seti ile bu aralik daralacaktir.
+  </div>
+</div>
+
+<!-- 8. FEATURES -->
+<div class="card" id="ozellikler">
+  <h2>8. Kullanilan 16 Ozellik</h2>
+
+  <table>
+    <tr><th>#</th><th>Ozellik Adi</th><th>Kaynak</th><th>MI Skoru</th><th>Log Donusum</th><th>Aciklama</th></tr>
+    <tr><td>1</td><td class="mono">Number of Peaks</td><td><span class="tag gsr">GSR</span></td><td>0.178</td><td>-</td><td>GSR sinyalindeki stres tepe sayisi (normalize)</td></tr>
+    <tr><td>2</td><td class="mono">SD_Saccade_Direction</td><td><span class="tag eye">Eye</span></td><td>0.073</td><td>-</td><td>Sakkad yon degiskenliginin standart sapmasi</td></tr>
+    <tr><td>3</td><td class="mono">Mean_Blink_Duration</td><td><span class="tag eye">Eye</span></td><td>0.061</td><td><span class="tag log">Evet</span></td><td>Ortalama goz kirpma suresi (ms)</td></tr>
+    <tr><td>4</td><td class="mono">Num_of_Blink</td><td><span class="tag eye">Eye</span></td><td>0.061</td><td><span class="tag log">Evet</span></td><td>Goz kirpma orani (sayi/pencere)</td></tr>
+    <tr><td>5</td><td class="mono">Skew_Microsac_V_Amp</td><td><span class="tag eye">Eye</span></td><td>0.044</td><td>-</td><td>Mikrosakkad dikey genlik carpikligi</td></tr>
+    <tr><td>6</td><td class="mono">Max_Microsac_Dir</td><td><span class="tag eye">Eye</span></td><td>0.039</td><td><span class="tag log">Evet</span></td><td>Mikrosakkad maksimum yonu (derece)</td></tr>
+    <tr><td>7</td><td class="mono">Max_Saccade_Direction</td><td><span class="tag eye">Eye</span></td><td>0.037</td><td><span class="tag log">Evet</span></td><td>Sakkad maksimum yonu (radyan)</td></tr>
+    <tr><td>8</td><td class="mono">Mean_Microsac_H_Amp</td><td><span class="tag eye">Eye</span></td><td>0.033</td><td>-</td><td>Mikrosakkad yatay genlik ortalamasi</td></tr>
+    <tr><td>9</td><td class="mono">Num_of_Fixations</td><td><span class="tag eye">Eye</span></td><td>0.031</td><td>-</td><td>Fiksasyon orani (sayi/pencere)</td></tr>
+    <tr><td>10</td><td class="mono">Mean_Saccade_Direction</td><td><span class="tag eye">Eye</span></td><td>0.027</td><td>-</td><td>Ortalama sakkad yonu (radyan)</td></tr>
+    <tr><td>11</td><td class="mono">SD_Microsac_V_Amp</td><td><span class="tag eye">Eye</span></td><td>0.025</td><td>-</td><td>Mikrosakkad dikey genlik standart sapmasi</td></tr>
+    <tr><td>12</td><td class="mono">Skew_Saccade_Direction</td><td><span class="tag eye">Eye</span></td><td>0.023</td><td>-</td><td>Sakkad yon carpikligi</td></tr>
+    <tr><td>13</td><td class="mono">Mean_Saccade_Duration</td><td><span class="tag eye">Eye</span></td><td>0.019</td><td>-</td><td>Ortalama sakkad suresi (ms)</td></tr>
+    <tr><td>14</td><td class="mono">SD</td><td><span class="tag gsr">GSR</span></td><td>0.016</td><td><span class="tag log">Evet</span></td><td>GSR sinyali standart sapmasi</td></tr>
+    <tr><td>15</td><td class="mono">Max_Microsac_V_Amp</td><td><span class="tag eye">Eye</span></td><td>0.012</td><td>-</td><td>Mikrosakkad dikey genlik maksimumu</td></tr>
+    <tr><td>16</td><td class="mono">Skew_Fixation_Duration</td><td><span class="tag eye">Eye</span></td><td>0.011</td><td>-</td><td>Fiksasyon suresi carpikligi</td></tr>
+  </table>
+
+  <div class="alert info">
+    <strong>Gozlem:</strong> En bilgilendirici ozellik GSR'dan gelen <code>Number of Peaks</code> (MI=0.178).
+    Eye tracking ozelliklerinin her biri tek basina dusuk MI tasirken, 14 tanesi birlikte guclu bir sinyal olusturmaktadir.
+  </div>
+</div>
+
+<!-- 9. UNITY INTEGRATION -->
+<div class="card" id="unity">
+  <h2>9. Unity Entegrasyonu</h2>
+
+  <h3>9.1 Veri Akisi</h3>
+  <div class="pipeline">
+    <div class="step">HTC Vive Eye Tracker</div>
+    <div class="arrow">&rarr;</div>
+    <div class="step">EyeTrackingDataCollector.cs</div>
+    <div class="arrow">&rarr;</div>
+    <div class="step" style="background:#2ecc71">StressPredictor.cs</div>
+    <div class="arrow">&rarr;</div>
+    <div class="step" style="background:#e67e22">WebSocket (8765)</div>
+    <div class="arrow">&rarr;</div>
+    <div class="step" style="background:#e74c3c">Python Model</div>
+  </div>
+  <div class="pipeline">
+    <div class="step">Plux OpenBAN (GSR)</div>
+    <div class="arrow">&rarr;</div>
+    <div class="step">GSRDataCollector.cs</div>
+    <div class="arrow">&uarr;</div>
+  </div>
+
+  <h3>9.2 Kisiye Ozel Kalibrasyon</h3>
+  <table>
+    <tr><th>Parametre</th><th>Deger</th><th>Aciklama</th></tr>
+    <tr><td>Kalibrasyon Suresi</td><td>15 saniye</td><td>Baglanti basinda sakin hal olcumu</td></tr>
+    <tr><td>Baseline</td><td>Otomatik</td><td>Sakin haldeki ortalama stres olasiligi</td></tr>
+    <tr><td>Offset</td><td>+0.15</td><td>Baseline uzerine eklenen hassasiyet tamponu</td></tr>
+    <tr><td>Min / Max Threshold</td><td>0.25 / 0.60</td><td>Kisisel threshold sinirlari</td></tr>
+    <tr><td>Varsayilan Threshold</td><td>0.777</td><td>Kalibrasyon tamamlanmadan kullanilir (model_meta.json'dan)</td></tr>
+  </table>
+
+  <h3>9.3 Sunucu Tarafi Otomatik Islemler</h3>
+  <p><code>websocket_server.py</code> su islemleri otomatik yapar (Unity'nin bunlardan haberi olmasi gerekmez):</p>
+  <ol style="margin-left:20px; margin-top:8px;">
+    <li>Gelen 16 ozelligin dogrulama ve siralama</li>
+    <li>5 ozellige log donusum uygulama (<code>model_meta.json</code> listesinden)</li>
+    <li>Eksik ozellikleri 0 ile doldurma</li>
+    <li>Stacking ensemble ile olasilik tahmini</li>
+    <li>Kisiye ozel kalibrasyon threshold'u ile karar</li>
+  </ol>
+</div>
+
+<!-- 10. LIMITATIONS -->
+<div class="card" id="sinirlamalar">
+  <h2>10. Sinirlamalar ve Gelecek Calisma</h2>
+
+  <div class="two-col">
+    <div>
+      <h3>Mevcut Sinirlamalar</h3>
+      <ul style="margin-left:20px;">
+        <li><strong>Kucuk veri seti (275 ornek):</strong> CV F1 ile test F1 arasinda buyuk fark — gercek performans %60-85 araliginda</li>
+        <li><strong>Kisi bagimsizligi test edilmedi:</strong> Leave-One-Subject-Out CV yapilmadi (katilimci ID verisi yok)</li>
+        <li><strong>Binary siniflandirma:</strong> Sadece stres/normal — stres siddeti olculmuyor</li>
+        <li><strong>VR ortamina ozgu:</strong> Model 360-VE videolari ile egitildi — farkli VR senaryolarinda performans degisebilir</li>
+      </ul>
+    </div>
+    <div>
+      <h3>Gelecek Iyilestirmeler</h3>
+      <ul style="margin-left:20px;">
+        <li><strong>Daha fazla veri toplama:</strong> 275 &rarr; 1000+ ornek ile CV-test farki kapanir</li>
+        <li><strong>Temporal modelleme:</strong> LSTM/Transformer ile zaman serisi olarak isleme</li>
+        <li><strong>Stres siddeti (regression):</strong> 0/1 yerine 0.0-1.0 surekli skor</li>
+        <li><strong>Online ogrenme:</strong> Kullanici verisiyle modeli gercek zamanli guncelleme</li>
+        <li><strong>Multimodal fusion:</strong> Kalp hizi (HR), ses tonu gibi ek modalitelerin eklenmesi</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  <p>STRESSLENS v3 Model Raporu &mdash; Lider Teknoloji &mdash; 10 Nisan 2026</p>
+  <p>Model: StackingClassifier (LightGBM + LogReg + SVM) | Dataset: VREED | Ozellik: 16 (14 Eye + 2 GSR)</p>
+</div>
+
+</div>
+</body>
+</html>

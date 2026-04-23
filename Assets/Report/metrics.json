@@ -1,0 +1,81 @@
+{
+  "v1": {
+    "accuracy": 0.8909090909090909,
+    "f1": 0.7692307692307692,
+    "precision": 0.8333333333333334,
+    "recall": 0.7142857142857143,
+    "roc_auc": 0.9581881533101047,
+    "pr_auc": 0.9060641739213167,
+    "log_loss": 0.23868447427306852,
+    "features": 32
+  },
+  "v3_default": {
+    "accuracy": 0.9090909090909091,
+    "f1": 0.8148148148148148,
+    "precision": 0.8461538461538461,
+    "recall": 0.7857142857142857,
+    "roc_auc": 0.9616724738675958,
+    "pr_auc": 0.9173786739576211,
+    "log_loss": 0.24389573741862666,
+    "features": 16
+  },
+  "v3_optimal": {
+    "accuracy": 0.9272727272727272,
+    "f1": 0.8461538461538461,
+    "precision": 0.9166666666666666,
+    "recall": 0.7857142857142857,
+    "roc_auc": 0.9616724738675958,
+    "pr_auc": 0.9173786739576211,
+    "log_loss": 0.24389573741862666,
+    "features": 16
+  },
+  "optimal_threshold": 0.7772111357337447,
+  "overfitting": {
+    "train_acc": 0.9603658536585366,
+    "train_f1": 0.9602446483180427,
+    "test_acc": 0.9272727272727272,
+    "test_f1": 0.8461538461538461
+  },
+  "cv_f1_stacking": {
+    "mean": 0.5941375661375662,
+    "std": 0.05786847156370894
+  },
+  "dataset": {
+    "total": 275,
+    "train": 220,
+    "test": 55,
+    "normal": 205,
+    "stressed": 70
+  },
+  "features_used": [
+    "Number of Peaks",
+    "SD_Saccade_Direction",
+    "Mean_Blink_Duration",
+    "Num_of_Blink",
+    "Skew_Microsac_V_Amp",
+    "Max_Microsac_Dir",
+    "Max_Saccade_Direction",
+    "Mean_Microsac_H_Amp",
+    "Num_of_Fixations",
+    "Mean_Saccade_Direction",
+    "SD_Microsac_V_Amp",
+    "Skew_Saccade_Direction",
+    "Mean_Saccade_Duration",
+    "SD",
+    "Max_Microsac_V_Amp",
+    "Skew_Fixation_Duration"
+  ],
+  "log_transformed": [
+    "Mean_Fixation_Duration",
+    "First_Fixation_Duration",
+    "Max_Saccade_Direction",
+    "Num_of_Blink",
+    "Mean_Blink_Duration",
+    "SD_Microsac_Peak_Vel",
+    "Skew_Microsac_Peak_Vel",
+    "Max_Microsac_Dir",
+    "SD"
+  ],
+  "corr_dropped_count": 25,
+  "mi_dropped_count": 16
+}

@@ -1,0 +1,6 @@
+websockets>=11.0
+numpy>=1.23
+pandas>=1.5
+lightgbm>=4.0
+scikit-learn>=1.2
+

@@ -97,3 +97,11 @@ InitTestScene*.unity*
 
 # Auto-generated scenes by play mode tests
 /[Aa]ssets/[Ii]nit[Tt]est[Ss]cene*.unity*
+.claude
+.vscode
+.svn
+.mcp.json
+.vsconfig
+bildiri_sekiller
+drift_plots
+İstatiksel Dağılım Analizi
