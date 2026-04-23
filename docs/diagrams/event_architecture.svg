@@ -1,0 +1,173 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 480" width="900" height="480">
+  <defs>
+    <linearGradient id="colGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#6366f1;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#4f46e5;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="predGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#0ea5e9;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0284c7;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="hudGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#f59e0b;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#d97706;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="logGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#10b981;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#059669;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="srvGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#a855f7;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#9333ea;stop-opacity:1" />
+    </linearGradient>
+    <filter id="ds3" x="-2%" y="-2%" width="104%" height="104%">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#1e293b" flood-opacity="0.12"/>
+    </filter>
+    <marker id="ar3" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#94a3b8"/>
+    </marker>
+    <marker id="ar3g" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#059669"/>
+    </marker>
+    <marker id="ar3b" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#4f46e5"/>
+    </marker>
+    <marker id="ar3o" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#d97706"/>
+    </marker>
+    <marker id="ar3p" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#9333ea"/>
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect width="900" height="480" rx="12" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+
+  <!-- Title -->
+  <text x="450" y="32" text-anchor="middle" style="font-family:system-ui,sans-serif;font-size:18px;font-weight:700;fill:#1e293b;">StressLens Event-Driven Architecture</text>
+  <text x="450" y="50" text-anchor="middle" style="font-family:system-ui,sans-serif;font-size:11px;fill:#64748b;">Component Communication via C# Events</text>
+
+  <!-- ===== DATA COLLECTORS (Left) ===== -->
+  <!-- EyeTrackingDataCollector -->
+  <rect x="25" y="80" width="230" height="140" rx="10" fill="url(#colGrad)" filter="url(#ds3)"/>
+  <text x="140" y="105" text-anchor="middle" style="font-family:system-ui,sans-serif;font-size:12px;font-weight:700;fill:#ffffff;">EyeTrackingDataCollector</text>
+  <line x1="40" y1="112" x2="240" y2="112" stroke="#ffffff" stroke-opacity="0.3" stroke-width="1"/>
+  <text x="40" y="130" style="font-family:system-ui,sans-serif;font-size:10px;fill:#e0e7ff;">Emits:</text>
+
+  <rect x="40" y="137" width="200" height="24" rx="5" fill="#ffffff" fill-opacity="0.2"/>
+  <text x="140" y="154" text-anchor="middle" style="font-family:monospace;font-size:10px;fill:#ffffff;">OnFeaturesCalculated</text>
+
+  <rect x="40" y="170" width="200" height="24" rx="5" fill="#ffffff" fill-opacity="0.15"/>
+  <text x="140" y="187" text-anchor="middle" style="font-family:system-ui,sans-serif;font-size:9px;fill:#c7d2fe;">14 eye tracking features</text>
+  <text x="140" y="199" text-anchor="middle" style="font-family:system-ui,sans-serif;font-size:9px;fill:#c7d2fe;">Triggered every 30s window</text>
+
+  <!-- GSRDataCollector -->
+  <rect x="25" y="240" width="230" height="170" rx="10" fill="url(#colGrad)" filter="url(#ds3)"/>
+  <text x="140" y="265" text-anchor="middle" style="font-family:system-ui,sans-serif;font-size:12px;font-weight:700;fill:#ffffff;">GSRDataCollector</text>
+  <line x1="40" y1="272" x2="240" y2="272" stroke="#ffffff" stroke-opacity="0.3" stroke-width="1"/>
+  <text x="40" y="290" style="font-family:system-ui,sans-serif;font-size:10px;fill:#e0e7ff;">Emits:</text>
+
+  <rect x="40" y="297" width="200" height="24" rx="5" fill="#ffffff" fill-opacity="0.2"/>
+  <text x="140" y="314" text-anchor="middle" style="font-family:monospace;font-size:10px;fill:#ffffff;">OnFeaturesCalculated</text>
+
+  <rect x="40" y="330" width="200" height="24" rx="5" fill="#ffffff" fill-opacity="0.2"/>
+  <text x="140" y="347" text-anchor="middle" style="font-family:monospace;font-size:10px;fill:#ffffff;">OnGSRValueUpdated</text>
+
+  <rect x="40" y="363" width="200" height="24" rx="5" fill="#ffffff" fill-opacity="0.15"/>
+  <text x="140" y="380" text-anchor="middle" style="font-family:system-ui,sans-serif;font-size:9px;fill:#c7d2fe;">2 GSR features + live uS value</text>
+  <text x="140" y="397" text-anchor="middle" style="font-family:system-ui,sans-serif;font-size:9px;fill:#c7d2fe;">Triggered every 30s window</text>
+
+  <!-- ===== STRESS PREDICTOR (Center) ===== -->
+  <rect x="310" y="80" width="260" height="330" rx="10" fill="url(#predGrad)" filter="url(#ds3)"/>
+  <text x="440" y="105" text-anchor="middle" style="font-family:system-ui,sans-serif;font-size:12px;font-weight:700;fill:#ffffff;">StressPredictor</text>
+  <line x1="325" y1="112" x2="555" y2="112" stroke="#ffffff" stroke-opacity="0.3" stroke-width="1"/>
+
+  <text x="325" y="133" style="font-family:system-ui,sans-serif;font-size:10px;fill:#bae6fd;">Subscribes to:</text>
+  <rect x="325" y="140" width="230" height="20" rx="4" fill="#ffffff" fill-opacity="0.15"/>
+  <text x="440" y="155" text-anchor="middle" style="font-family:system-ui,sans-serif;font-size:9px;fill:#e0f2fe;">Eye + GSR OnFeaturesCalculated</text>
+
+  <text x="325" y="180" style="font-family:system-ui,sans-serif;font-size:10px;fill:#bae6fd;">Process:</text>
+  <rect x="325" y="187" width="230" height="20" rx="4" fill="#ffffff" fill-opacity="0.15"/>
+  <text x="440" y="202" text-anchor="middle" style="font-family:system-ui,sans-serif;font-size:9px;fill:#e0f2fe;">Aggregate 16 features from collectors</text>
+  <rect x="325" y="213" width="230" height="20" rx="4" fill="#ffffff" fill-opacity="0.15"/>
+  <text x="440" y="228" text-anchor="middle" style="font-family:system-ui,sans-serif;font-size:9px;fill:#e0f2fe;">Send via WebSocket to Python server</text>
+  <rect x="325" y="239" width="230" height="20" rx="4" fill="#ffffff" fill-opacity="0.15"/>
+  <text x="440" y="254" text-anchor="middle" style="font-family:system-ui,sans-serif;font-size:9px;fill:#e0f2fe;">Receive prediction response</text>
+
+  <text x="325" y="280" style="font-family:system-ui,sans-serif;font-size:10px;fill:#bae6fd;">Emits:</text>
+  <rect x="325" y="287" width="230" height="24" rx="5" fill="#ffffff" fill-opacity="0.2"/>
+  <text x="440" y="304" text-anchor="middle" style="font-family:monospace;font-size:10px;fill:#ffffff;">OnPredictionReceived</text>
+
+  <rect x="325" y="317" width="230" height="24" rx="5" fill="#ffffff" fill-opacity="0.2"/>
+  <text x="440" y="334" text-anchor="middle" style="font-family:monospace;font-size:10px;fill:#ffffff;">OnCalibrationProgress</text>
+
+  <rect x="325" y="347" width="230" height="24" rx="5" fill="#ffffff" fill-opacity="0.2"/>
+  <text x="440" y="364" text-anchor="middle" style="font-family:monospace;font-size:10px;fill:#ffffff;">OnCalibrationComplete</text>
+
+  <rect x="325" y="380" width="230" height="20" rx="4" fill="#ffffff" fill-opacity="0.15"/>
+  <text x="440" y="395" text-anchor="middle" style="font-family:system-ui,sans-serif;font-size:9px;fill:#e0f2fe;">StressResult: {stres, olasilik, durum}</text>
+
+  <!-- ===== SUBSCRIBERS (Right) ===== -->
+  <!-- StressWarningHUD -->
+  <rect x="630" y="80" width="250" height="175" rx="10" fill="url(#hudGrad)" filter="url(#ds3)"/>
+  <text x="755" y="105" text-anchor="middle" style="font-family:system-ui,sans-serif;font-size:12px;font-weight:700;fill:#ffffff;">StressWarningHUD</text>
+  <line x1="645" y1="112" x2="865" y2="112" stroke="#ffffff" stroke-opacity="0.3" stroke-width="1"/>
+  <text x="645" y="130" style="font-family:system-ui,sans-serif;font-size:10px;fill:#fef3c7;">Subscribes to:</text>
+
+  <rect x="645" y="137" width="220" height="20" rx="4" fill="#ffffff" fill-opacity="0.15"/>
+  <text x="755" y="152" text-anchor="middle" style="font-family:monospace;font-size:9px;fill:#ffffff;">OnPredictionReceived</text>
+  <rect x="645" y="163" width="220" height="20" rx="4" fill="#ffffff" fill-opacity="0.15"/>
+  <text x="755" y="178" text-anchor="middle" style="font-family:monospace;font-size:9px;fill:#ffffff;">OnCalibrationProgress</text>
+  <rect x="645" y="189" width="220" height="20" rx="4" fill="#ffffff" fill-opacity="0.15"/>
+  <text x="755" y="204" text-anchor="middle" style="font-family:monospace;font-size:9px;fill:#ffffff;">OnGSRValueUpdated</text>
+
+  <text x="645" y="228" style="font-family:system-ui,sans-serif;font-size:10px;fill:#fef3c7;">Actions:</text>
+  <text x="645" y="243" style="font-family:system-ui,sans-serif;font-size:9px;fill:#fde68a;">Vignette overlay | Warning text | GSR display</text>
+
+  <!-- DataLogger -->
+  <rect x="630" y="275" width="250" height="135" rx="10" fill="url(#logGrad)" filter="url(#ds3)"/>
+  <text x="755" y="300" text-anchor="middle" style="font-family:system-ui,sans-serif;font-size:12px;font-weight:700;fill:#ffffff;">DataLogger</text>
+  <line x1="645" y1="307" x2="865" y2="307" stroke="#ffffff" stroke-opacity="0.3" stroke-width="1"/>
+  <text x="645" y="325" style="font-family:system-ui,sans-serif;font-size:10px;fill:#d1fae5;">Subscribes to:</text>
+
+  <rect x="645" y="332" width="220" height="20" rx="4" fill="#ffffff" fill-opacity="0.15"/>
+  <text x="755" y="347" text-anchor="middle" style="font-family:monospace;font-size:9px;fill:#ffffff;">OnFeaturesCalculated (all)</text>
+  <rect x="645" y="358" width="220" height="20" rx="4" fill="#ffffff" fill-opacity="0.15"/>
+  <text x="755" y="373" text-anchor="middle" style="font-family:monospace;font-size:9px;fill:#ffffff;">OnPredictionReceived</text>
+
+  <text x="645" y="398" style="font-family:system-ui,sans-serif;font-size:10px;fill:#d1fae5;">Output: 4 CSV files per session</text>
+
+  <!-- ===== CONNECTION ARROWS ===== -->
+  <!-- Eye -> StressPredictor -->
+  <path d="M259 150 L306 150" fill="none" stroke="#4f46e5" stroke-width="2" marker-end="url(#ar3b)"/>
+  <text x="270" y="144" style="font-family:system-ui,sans-serif;font-size:8px;fill:#6366f1;font-style:italic;">event</text>
+
+  <!-- GSR -> StressPredictor -->
+  <path d="M259 310 L306 310" fill="none" stroke="#4f46e5" stroke-width="2" marker-end="url(#ar3b)"/>
+  <text x="270" y="304" style="font-family:system-ui,sans-serif;font-size:8px;fill:#6366f1;font-style:italic;">event</text>
+
+  <!-- GSR -> HUD (OnGSRValueUpdated) -->
+  <path d="M259 345 L280 345 L280 440 L755 440 L755 254" fill="none" stroke="#d97706" stroke-width="1.5" stroke-dasharray="4,2" marker-end="url(#ar3o)"/>
+  <text x="620" y="436" style="font-family:system-ui,sans-serif;font-size:8px;fill:#d97706;font-style:italic;">OnGSRValueUpdated</text>
+
+  <!-- StressPredictor -> HUD -->
+  <path d="M574 300 L626 170" fill="none" stroke="#d97706" stroke-width="2" marker-end="url(#ar3o)"/>
+  <text x="586" y="220" style="font-family:system-ui,sans-serif;font-size:8px;fill:#d97706;font-style:italic;">OnPrediction</text>
+
+  <!-- StressPredictor -> DataLogger -->
+  <path d="M574 345 L626 345" fill="none" stroke="#059669" stroke-width="2" marker-end="url(#ar3g)"/>
+  <text x="584" y="339" style="font-family:system-ui,sans-serif;font-size:8px;fill:#059669;font-style:italic;">OnPrediction</text>
+
+  <!-- Eye/GSR -> DataLogger (direct) -->
+  <path d="M259 180 L285 180 L285 350 L306 350" fill="none" stroke="#059669" stroke-width="1.2" stroke-dasharray="4,2"/>
+
+  <!-- ===== PYTHON SERVER (Bottom) ===== -->
+  <rect x="310" y="430" width="260" height="38" rx="8" fill="url(#srvGrad)" filter="url(#ds3)"/>
+  <text x="440" y="454" text-anchor="middle" style="font-family:system-ui,sans-serif;font-size:11px;font-weight:600;fill:#ffffff;">Python ML Server (WebSocket)</text>
+
+  <!-- Bidirectional arrow predictor <-> server -->
+  <line x1="420" y1="414" x2="420" y2="426" stroke="#9333ea" stroke-width="2" marker-end="url(#ar3p)"/>
+  <line x1="460" y1="426" x2="460" y2="414" stroke="#9333ea" stroke-width="2" marker-end="url(#ar3p)"/>
+  <text x="405" y="424" style="font-family:system-ui,sans-serif;font-size:7px;fill:#9333ea;">req</text>
+  <text x="465" y="424" style="font-family:system-ui,sans-serif;font-size:7px;fill:#9333ea;">res</text>
+</svg>

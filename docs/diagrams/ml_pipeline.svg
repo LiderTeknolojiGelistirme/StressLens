@@ -1,0 +1,155 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 520" width="900" height="520">
+  <defs>
+    <linearGradient id="eyeGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#6366f1;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#4f46e5;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="gsrGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#14b8a6;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0d9488;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="procGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#f59e0b;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#d97706;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="modelGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#10b981;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#059669;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="outGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#ec4899;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#db2777;stop-opacity:1" />
+    </linearGradient>
+    <filter id="ds2" x="-2%" y="-2%" width="104%" height="104%">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#1e293b" flood-opacity="0.12"/>
+    </filter>
+    <marker id="ar2" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#94a3b8"/>
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect width="900" height="520" rx="12" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+
+  <!-- Title -->
+  <text x="450" y="32" text-anchor="middle" style="font-family:system-ui,sans-serif;font-size:18px;font-weight:700;fill:#1e293b;">StressLens Machine Learning Pipeline</text>
+  <text x="450" y="50" text-anchor="middle" style="font-family:system-ui,sans-serif;font-size:11px;fill:#64748b;">16-Feature Stacking Classifier with Personal Calibration</text>
+
+  <!-- ===== INPUT: Eye Tracking Features ===== -->
+  <rect x="20" y="70" width="255" height="330" rx="10" fill="url(#eyeGrad)" filter="url(#ds2)"/>
+  <text x="148" y="93" text-anchor="middle" style="font-family:system-ui,sans-serif;font-size:13px;font-weight:700;fill:#ffffff;">Eye Tracking Features (14)</text>
+  <line x1="35" y1="100" x2="260" y2="100" stroke="#ffffff" stroke-opacity="0.3" stroke-width="1"/>
+
+  <text x="40" y="120" style="font-family:system-ui,sans-serif;font-size:9px;fill:#e0e7ff;">Fixation (2)</text>
+  <text x="40" y="135" style="font-family:monospace;font-size:9px;fill:#c7d2fe;">  Num_of_Fixations</text>
+  <text x="40" y="149" style="font-family:monospace;font-size:9px;fill:#c7d2fe;">  Skew_Fixation_Duration</text>
+
+  <text x="40" y="170" style="font-family:system-ui,sans-serif;font-size:9px;fill:#e0e7ff;">Saccade (6)</text>
+  <text x="40" y="185" style="font-family:monospace;font-size:9px;fill:#c7d2fe;">  Mean_Saccade_Duration</text>
+  <text x="40" y="199" style="font-family:monospace;font-size:9px;fill:#c7d2fe;">  Mean_Saccade_Direction</text>
+  <text x="40" y="213" style="font-family:monospace;font-size:9px;fill:#c7d2fe;">  SD_Saccade_Direction</text>
+  <text x="40" y="227" style="font-family:monospace;font-size:9px;fill:#c7d2fe;">  Max_Saccade_Direction</text>
+  <text x="40" y="241" style="font-family:monospace;font-size:9px;fill:#c7d2fe;">  Skew_Saccade_Direction</text>
+
+  <text x="40" y="262" style="font-family:system-ui,sans-serif;font-size:9px;fill:#e0e7ff;">Blink (3)</text>
+  <text x="40" y="277" style="font-family:monospace;font-size:9px;fill:#c7d2fe;">  Num_of_Blink</text>
+  <text x="40" y="291" style="font-family:monospace;font-size:9px;fill:#c7d2fe;">  Mean_Blink_Duration</text>
+
+  <text x="40" y="312" style="font-family:system-ui,sans-serif;font-size:9px;fill:#e0e7ff;">Microsaccade (5)</text>
+  <text x="40" y="327" style="font-family:monospace;font-size:9px;fill:#c7d2fe;">  Mean_Microsac_H_Amp</text>
+  <text x="40" y="341" style="font-family:monospace;font-size:9px;fill:#c7d2fe;">  SD_Microsac_V_Amp</text>
+  <text x="40" y="355" style="font-family:monospace;font-size:9px;fill:#c7d2fe;">  Max_Microsac_V_Amp</text>
+  <text x="40" y="369" style="font-family:monospace;font-size:9px;fill:#c7d2fe;">  Skew_Microsac_V_Amp</text>
+  <text x="40" y="383" style="font-family:monospace;font-size:9px;fill:#c7d2fe;">  Max_Microsac_Dir</text>
+
+  <!-- ===== INPUT: GSR Features ===== -->
+  <rect x="20" y="410" width="255" height="90" rx="10" fill="url(#gsrGrad)" filter="url(#ds2)"/>
+  <text x="148" y="433" text-anchor="middle" style="font-family:system-ui,sans-serif;font-size:13px;font-weight:700;fill:#ffffff;">GSR Features (2)</text>
+  <line x1="35" y1="440" x2="260" y2="440" stroke="#ffffff" stroke-opacity="0.3" stroke-width="1"/>
+  <text x="40" y="460" style="font-family:monospace;font-size:10px;fill:#ccfbf1;">  SD (Std. Deviation)</text>
+  <text x="40" y="478" style="font-family:monospace;font-size:10px;fill:#ccfbf1;">  Number_of_Peaks (normalized)</text>
+
+  <!-- Arrows from inputs to processing -->
+  <line x1="279" y1="235" x2="320" y2="235" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#ar2)"/>
+  <line x1="279" y1="455" x2="300" y2="455" stroke="#94a3b8" stroke-width="1.5"/>
+  <path d="M300 455 L300 290 L320 290" fill="none" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#ar2)"/>
+
+  <!-- ===== PROCESSING ===== -->
+  <rect x="325" y="165" width="170" height="190" rx="10" fill="url(#procGrad)" filter="url(#ds2)"/>
+  <text x="410" y="190" text-anchor="middle" style="font-family:system-ui,sans-serif;font-size:13px;font-weight:700;fill:#ffffff;">Pre-Processing</text>
+  <line x1="340" y1="198" x2="480" y2="198" stroke="#ffffff" stroke-opacity="0.3" stroke-width="1"/>
+
+  <rect x="340" y="210" width="140" height="28" rx="5" fill="#ffffff" fill-opacity="0.2"/>
+  <text x="410" y="229" text-anchor="middle" style="font-family:system-ui,sans-serif;font-size:10px;fill:#ffffff;">Log Transform</text>
+
+  <rect x="340" y="248" width="140" height="28" rx="5" fill="#ffffff" fill-opacity="0.2"/>
+  <text x="410" y="267" text-anchor="middle" style="font-family:system-ui,sans-serif;font-size:10px;fill:#ffffff;">MI Feature Selection</text>
+
+  <rect x="340" y="286" width="140" height="28" rx="5" fill="#ffffff" fill-opacity="0.2"/>
+  <text x="410" y="305" text-anchor="middle" style="font-family:system-ui,sans-serif;font-size:10px;fill:#ffffff;">SMOTE Balance</text>
+
+  <rect x="340" y="324" width="140" height="22" rx="4" fill="#ffffff" fill-opacity="0.25"/>
+  <text x="410" y="340" text-anchor="middle" style="font-family:system-ui,sans-serif;font-size:9px;font-weight:600;fill:#ffffff;">16 features in</text>
+
+  <!-- Arrow to model -->
+  <line x1="499" y1="260" x2="535" y2="260" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#ar2)"/>
+
+  <!-- ===== MODEL ===== -->
+  <rect x="540" y="115" width="170" height="290" rx="10" fill="url(#modelGrad)" filter="url(#ds2)"/>
+  <text x="625" y="140" text-anchor="middle" style="font-family:system-ui,sans-serif;font-size:13px;font-weight:700;fill:#ffffff;">Stacking Classifier</text>
+  <line x1="555" y1="148" x2="695" y2="148" stroke="#ffffff" stroke-opacity="0.3" stroke-width="1"/>
+
+  <!-- Base learners -->
+  <rect x="555" y="162" width="140" height="42" rx="6" fill="#ffffff" fill-opacity="0.2"/>
+  <text x="625" y="180" text-anchor="middle" style="font-family:system-ui,sans-serif;font-size:11px;font-weight:600;fill:#ffffff;">LightGBM</text>
+  <text x="625" y="196" text-anchor="middle" style="font-family:system-ui,sans-serif;font-size:9px;fill:#d1fae5;">Primary base learner</text>
+
+  <rect x="555" y="212" width="140" height="42" rx="6" fill="#ffffff" fill-opacity="0.2"/>
+  <text x="625" y="230" text-anchor="middle" style="font-family:system-ui,sans-serif;font-size:11px;font-weight:600;fill:#ffffff;">Logistic Regression</text>
+  <text x="625" y="246" text-anchor="middle" style="font-family:system-ui,sans-serif;font-size:9px;fill:#d1fae5;">Linear base learner</text>
+
+  <rect x="555" y="262" width="140" height="42" rx="6" fill="#ffffff" fill-opacity="0.2"/>
+  <text x="625" y="280" text-anchor="middle" style="font-family:system-ui,sans-serif;font-size:11px;font-weight:600;fill:#ffffff;">SVM (RBF)</text>
+  <text x="625" y="296" text-anchor="middle" style="font-family:system-ui,sans-serif;font-size:9px;fill:#d1fae5;">Kernel base learner</text>
+
+  <!-- Bracket -->
+  <text x="700" y="235" style="font-family:system-ui,sans-serif;font-size:40px;fill:#ffffff;font-weight:100;">}</text>
+
+  <!-- Meta learner -->
+  <rect x="555" y="320" width="140" height="35" rx="6" fill="#ffffff" fill-opacity="0.3"/>
+  <text x="625" y="337" text-anchor="middle" style="font-family:system-ui,sans-serif;font-size:11px;font-weight:600;fill:#ffffff;">Meta-Learner</text>
+  <text x="625" y="350" text-anchor="middle" style="font-family:system-ui,sans-serif;font-size:9px;fill:#d1fae5;">Probability calibration</text>
+
+  <!-- Arrows from base to meta -->
+  <line x1="625" y1="304" x2="625" y2="316" stroke="#ffffff" stroke-opacity="0.5" stroke-width="1"/>
+
+  <!-- Arrow to output -->
+  <line x1="625" y1="358" x2="625" y2="385" stroke="#94a3b8" stroke-width="1.5"/>
+  <line x1="714" y1="260" x2="750" y2="260" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#ar2)"/>
+
+  <!-- ===== OUTPUT ===== -->
+  <rect x="755" y="115" width="130" height="290" rx="10" fill="url(#outGrad)" filter="url(#ds2)"/>
+  <text x="820" y="140" text-anchor="middle" style="font-family:system-ui,sans-serif;font-size:13px;font-weight:700;fill:#ffffff;">Output</text>
+  <line x1="770" y1="148" x2="870" y2="148" stroke="#ffffff" stroke-opacity="0.3" stroke-width="1"/>
+
+  <rect x="770" y="165" width="100" height="45" rx="6" fill="#ffffff" fill-opacity="0.2"/>
+  <text x="820" y="185" text-anchor="middle" style="font-family:system-ui,sans-serif;font-size:11px;font-weight:600;fill:#ffffff;">Prediction</text>
+  <text x="820" y="201" text-anchor="middle" style="font-family:system-ui,sans-serif;font-size:9px;fill:#fce7f3;">Stress / No-Stress</text>
+
+  <rect x="770" y="220" width="100" height="45" rx="6" fill="#ffffff" fill-opacity="0.2"/>
+  <text x="820" y="240" text-anchor="middle" style="font-family:system-ui,sans-serif;font-size:11px;font-weight:600;fill:#ffffff;">Probability</text>
+  <text x="820" y="256" text-anchor="middle" style="font-family:system-ui,sans-serif;font-size:9px;fill:#fce7f3;">0.0 - 1.0</text>
+
+  <rect x="770" y="275" width="100" height="45" rx="6" fill="#ffffff" fill-opacity="0.2"/>
+  <text x="820" y="295" text-anchor="middle" style="font-family:system-ui,sans-serif;font-size:11px;font-weight:600;fill:#ffffff;">Calibration</text>
+  <text x="820" y="311" text-anchor="middle" style="font-family:system-ui,sans-serif;font-size:9px;fill:#fce7f3;">Baseline + Offset</text>
+
+  <rect x="770" y="330" width="100" height="60" rx="6" fill="#ffffff" fill-opacity="0.2"/>
+  <text x="820" y="350" text-anchor="middle" style="font-family:system-ui,sans-serif;font-size:11px;font-weight:600;fill:#ffffff;">VR Feedback</text>
+  <text x="820" y="366" text-anchor="middle" style="font-family:system-ui,sans-serif;font-size:9px;fill:#fce7f3;">Vignette overlay</text>
+  <text x="820" y="380" text-anchor="middle" style="font-family:system-ui,sans-serif;font-size:9px;fill:#fce7f3;">Warning text</text>
+
+  <!-- Bottom info bar -->
+  <rect x="20" y="480" width="865" height="28" rx="6" fill="#fef3c7" stroke="#fcd34d" stroke-width="1"/>
+  <text x="450" y="499" text-anchor="middle" style="font-family:system-ui,sans-serif;font-size:10px;fill:#92400e;">Feature Selection: 51+ initial features &#8594; Correlation analysis (drop 25) &#8594; Mutual Information scoring (drop 16) &#8594; Final 16 features</text>
+</svg>

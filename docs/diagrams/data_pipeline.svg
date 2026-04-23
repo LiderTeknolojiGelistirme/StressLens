@@ -1,0 +1,140 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 340" width="920" height="340">
+  <defs>
+    <linearGradient id="s1Grad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#818cf8;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#6366f1;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="s2Grad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#38bdf8;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0ea5e9;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="s3Grad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#34d399;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#10b981;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="s4Grad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#c084fc;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#a855f7;stop-opacity:1" />
+    </linearGradient>
+    <filter id="ds" x="-2%" y="-2%" width="104%" height="104%">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#1e293b" flood-opacity="0.15"/>
+    </filter>
+    <marker id="arrRight" markerWidth="12" markerHeight="8" refX="11" refY="4" orient="auto">
+      <polygon points="0 0, 12 4, 0 8" fill="#94a3b8"/>
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect width="920" height="340" rx="12" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+
+  <!-- Title -->
+  <text x="460" y="32" text-anchor="middle" style="font-family:system-ui,sans-serif;font-size:18px;font-weight:700;fill:#1e293b;">StressLens Data Processing Pipeline</text>
+
+  <!-- Stage 1: Data Collection -->
+  <rect x="15" y="55" width="200" height="270" rx="10" fill="url(#s1Grad)" filter="url(#ds)"/>
+  <text x="115" y="80" text-anchor="middle" style="font-family:system-ui,sans-serif;font-size:13px;font-weight:700;fill:#ffffff;">1. Data Collection</text>
+  <line x1="35" y1="88" x2="195" y2="88" stroke="#ffffff" stroke-opacity="0.3" stroke-width="1"/>
+
+  <text x="115" y="110" text-anchor="middle" style="font-family:system-ui,sans-serif;font-size:11px;font-weight:600;fill:#e0e7ff;">EDA Sensor</text>
+  <text x="115" y="128" text-anchor="middle" style="font-family:system-ui,sans-serif;font-size:10px;fill:#c7d2fe;">ADC (0-65535)</text>
+  <text x="115" y="144" text-anchor="middle" style="font-family:system-ui,sans-serif;font-size:10px;fill:#c7d2fe;">1000 Hz sampling</text>
+  <text x="115" y="160" text-anchor="middle" style="font-family:system-ui,sans-serif;font-size:10px;fill:#c7d2fe;">Plux OpenBAN (BT)</text>
+
+  <line x1="45" y1="175" x2="185" y2="175" stroke="#ffffff" stroke-opacity="0.2" stroke-width="1"/>
+
+  <text x="115" y="197" text-anchor="middle" style="font-family:system-ui,sans-serif;font-size:11px;font-weight:600;fill:#e0e7ff;">Eye Tracking</text>
+  <text x="115" y="215" text-anchor="middle" style="font-family:system-ui,sans-serif;font-size:10px;fill:#c7d2fe;">XR Camera</text>
+  <text x="115" y="231" text-anchor="middle" style="font-family:system-ui,sans-serif;font-size:10px;fill:#c7d2fe;">100 Hz sampling</text>
+  <text x="115" y="247" text-anchor="middle" style="font-family:system-ui,sans-serif;font-size:10px;fill:#c7d2fe;">Gaze, Pupil Diameter</text>
+  <text x="115" y="263" text-anchor="middle" style="font-family:system-ui,sans-serif;font-size:10px;fill:#c7d2fe;">Eye Openness</text>
+
+  <rect x="40" y="280" width="150" height="30" rx="4" fill="#ffffff" fill-opacity="0.15"/>
+  <text x="115" y="300" text-anchor="middle" style="font-family:system-ui,sans-serif;font-size:10px;font-weight:600;fill:#ffffff;">HTC Vive Focus Vision</text>
+
+  <!-- Arrow 1->2 -->
+  <line x1="219" y1="190" x2="240" y2="190" stroke="#94a3b8" stroke-width="2" marker-end="url(#arrRight)"/>
+
+  <!-- Stage 2: Signal Processing -->
+  <rect x="245" y="55" width="200" height="270" rx="10" fill="url(#s2Grad)" filter="url(#ds)"/>
+  <text x="345" y="80" text-anchor="middle" style="font-family:system-ui,sans-serif;font-size:13px;font-weight:700;fill:#ffffff;">2. Signal Processing</text>
+  <line x1="265" y1="88" x2="425" y2="88" stroke="#ffffff" stroke-opacity="0.3" stroke-width="1"/>
+
+  <rect x="260" y="100" width="170" height="24" rx="4" fill="#ffffff" fill-opacity="0.15"/>
+  <text x="345" y="116" text-anchor="middle" style="font-family:system-ui,sans-serif;font-size:10px;fill:#ffffff;">ADC to uS conversion</text>
+
+  <rect x="260" y="132" width="170" height="24" rx="4" fill="#ffffff" fill-opacity="0.15"/>
+  <text x="345" y="148" text-anchor="middle" style="font-family:system-ui,sans-serif;font-size:10px;fill:#ffffff;">1000 Hz to 100 Hz downsample</text>
+
+  <rect x="260" y="164" width="170" height="24" rx="4" fill="#ffffff" fill-opacity="0.15"/>
+  <text x="345" y="180" text-anchor="middle" style="font-family:system-ui,sans-serif;font-size:10px;fill:#ffffff;">Moving average filter</text>
+
+  <rect x="260" y="196" width="170" height="24" rx="4" fill="#ffffff" fill-opacity="0.15"/>
+  <text x="345" y="212" text-anchor="middle" style="font-family:system-ui,sans-serif;font-size:10px;fill:#ffffff;">Blink artifact removal</text>
+
+  <rect x="260" y="228" width="170" height="24" rx="4" fill="#ffffff" fill-opacity="0.15"/>
+  <text x="345" y="244" text-anchor="middle" style="font-family:system-ui,sans-serif;font-size:10px;fill:#ffffff;">Min fixation: 100 ms</text>
+
+  <rect x="260" y="260" width="170" height="24" rx="4" fill="#ffffff" fill-opacity="0.15"/>
+  <text x="345" y="276" text-anchor="middle" style="font-family:system-ui,sans-serif;font-size:10px;fill:#ffffff;">Wave amplitude: 0.3 uS</text>
+
+  <rect x="260" y="295" width="170" height="22" rx="4" fill="#ffffff" fill-opacity="0.2"/>
+  <text x="345" y="310" text-anchor="middle" style="font-family:system-ui,sans-serif;font-size:9px;font-weight:600;fill:#ffffff;">Clean signal output</text>
+
+  <!-- Arrow 2->3 -->
+  <line x1="449" y1="190" x2="470" y2="190" stroke="#94a3b8" stroke-width="2" marker-end="url(#arrRight)"/>
+
+  <!-- Stage 3: Feature Extraction -->
+  <rect x="475" y="55" width="200" height="270" rx="10" fill="url(#s3Grad)" filter="url(#ds)"/>
+  <text x="575" y="80" text-anchor="middle" style="font-family:system-ui,sans-serif;font-size:13px;font-weight:700;fill:#ffffff;">3. Feature Extraction</text>
+  <line x1="495" y1="88" x2="655" y2="88" stroke="#ffffff" stroke-opacity="0.3" stroke-width="1"/>
+
+  <rect x="490" y="100" width="170" height="24" rx="4" fill="#ffffff" fill-opacity="0.15"/>
+  <text x="575" y="116" text-anchor="middle" style="font-family:system-ui,sans-serif;font-size:10px;fill:#ffffff;">Saccade direction (rad)</text>
+
+  <rect x="490" y="132" width="170" height="24" rx="4" fill="#ffffff" fill-opacity="0.15"/>
+  <text x="575" y="148" text-anchor="middle" style="font-family:system-ui,sans-serif;font-size:10px;fill:#ffffff;">Peak count (peak/sample)</text>
+
+  <rect x="490" y="164" width="170" height="24" rx="4" fill="#ffffff" fill-opacity="0.15"/>
+  <text x="575" y="180" text-anchor="middle" style="font-family:system-ui,sans-serif;font-size:10px;fill:#ffffff;">Engbert-Kliegl grouping</text>
+
+  <rect x="490" y="196" width="170" height="24" rx="4" fill="#ffffff" fill-opacity="0.15"/>
+  <text x="575" y="212" text-anchor="middle" style="font-family:system-ui,sans-serif;font-size:10px;fill:#ffffff;">Fix / Sac / Blink classify</text>
+
+  <rect x="490" y="228" width="170" height="24" rx="4" fill="#ffffff" fill-opacity="0.15"/>
+  <text x="575" y="244" text-anchor="middle" style="font-family:system-ui,sans-serif;font-size:10px;fill:#ffffff;">Main Sequence validation</text>
+
+  <rect x="490" y="260" width="170" height="24" rx="4" fill="#ffffff" fill-opacity="0.15"/>
+  <text x="575" y="276" text-anchor="middle" style="font-family:system-ui,sans-serif;font-size:10px;fill:#ffffff;">Deg to Rad conversion</text>
+
+  <rect x="490" y="295" width="170" height="22" rx="4" fill="#ffffff" fill-opacity="0.2"/>
+  <text x="575" y="310" text-anchor="middle" style="font-family:system-ui,sans-serif;font-size:9px;font-weight:600;fill:#ffffff;">16-feature vector</text>
+
+  <!-- Arrow 3->4 -->
+  <line x1="679" y1="190" x2="700" y2="190" stroke="#94a3b8" stroke-width="2" marker-end="url(#arrRight)"/>
+
+  <!-- Stage 4: Decision & Feedback -->
+  <rect x="705" y="55" width="200" height="270" rx="10" fill="url(#s4Grad)" filter="url(#ds)"/>
+  <text x="805" y="80" text-anchor="middle" style="font-family:system-ui,sans-serif;font-size:13px;font-weight:700;fill:#ffffff;">4. Decision &amp; Feedback</text>
+  <line x1="725" y1="88" x2="885" y2="88" stroke="#ffffff" stroke-opacity="0.3" stroke-width="1"/>
+
+  <rect x="720" y="100" width="170" height="24" rx="4" fill="#ffffff" fill-opacity="0.15"/>
+  <text x="805" y="116" text-anchor="middle" style="font-family:system-ui,sans-serif;font-size:10px;fill:#ffffff;">LightGBM classification</text>
+
+  <rect x="720" y="132" width="170" height="24" rx="4" fill="#ffffff" fill-opacity="0.15"/>
+  <text x="805" y="148" text-anchor="middle" style="font-family:system-ui,sans-serif;font-size:10px;fill:#ffffff;">Personal calibration (15s)</text>
+
+  <rect x="720" y="164" width="170" height="24" rx="4" fill="#ffffff" fill-opacity="0.15"/>
+  <text x="805" y="180" text-anchor="middle" style="font-family:system-ui,sans-serif;font-size:10px;fill:#ffffff;">Dynamic threshold</text>
+
+  <rect x="720" y="196" width="170" height="24" rx="4" fill="#ffffff" fill-opacity="0.15"/>
+  <text x="805" y="212" text-anchor="middle" style="font-family:system-ui,sans-serif;font-size:10px;fill:#ffffff;">XR vignette (yellow glow)</text>
+
+  <rect x="720" y="228" width="170" height="24" rx="4" fill="#ffffff" fill-opacity="0.15"/>
+  <text x="805" y="244" text-anchor="middle" style="font-family:system-ui,sans-serif;font-size:10px;fill:#ffffff;">Warning message display</text>
+
+  <rect x="720" y="260" width="170" height="24" rx="4" fill="#ffffff" fill-opacity="0.15"/>
+  <text x="805" y="276" text-anchor="middle" style="font-family:system-ui,sans-serif;font-size:10px;fill:#ffffff;">CSV data logging</text>
+
+  <rect x="720" y="295" width="170" height="22" rx="4" fill="#ffffff" fill-opacity="0.2"/>
+  <text x="805" y="310" text-anchor="middle" style="font-family:system-ui,sans-serif;font-size:9px;font-weight:600;fill:#ffffff;">Real-time user feedback</text>
+</svg>

@@ -1,0 +1,152 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 680" width="900" height="680">
+  <defs>
+    <linearGradient id="hwGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#6366f1;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#4f46e5;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="unityGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#0ea5e9;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0284c7;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="pyGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#10b981;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#059669;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="wsGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#f59e0b;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#d97706;stop-opacity:1" />
+    </linearGradient>
+    <filter id="shadow" x="-2%" y="-2%" width="104%" height="104%">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#1e293b" flood-opacity="0.12"/>
+    </filter>
+    <marker id="arrowGray" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#64748b"/>
+    </marker>
+    <marker id="arrowWhite" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#ffffff"/>
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect width="900" height="680" rx="12" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+
+  <!-- Title -->
+  <text x="450" y="38" text-anchor="middle" style="font-family:system-ui,sans-serif;font-size:20px;font-weight:700;fill:#1e293b;">StressLens System Architecture</text>
+  <text x="450" y="58" text-anchor="middle" style="font-family:system-ui,sans-serif;font-size:12px;fill:#64748b;">Real-Time Stress Detection Pipeline for VR Environments</text>
+
+  <!-- ===== HARDWARE LAYER ===== -->
+  <rect x="30" y="78" width="840" height="110" rx="10" fill="#f5f3ff" stroke="#c4b5fd" stroke-width="1.5" stroke-dasharray="6,3" filter="url(#shadow)"/>
+  <text x="50" y="100" style="font-family:system-ui,sans-serif;font-size:11px;font-weight:600;fill:#7c3aed;text-transform:uppercase;letter-spacing:1px;">Hardware Layer</text>
+
+  <!-- HTC Vive -->
+  <rect x="60" y="110" width="370" height="66" rx="8" fill="url(#hwGrad)" filter="url(#shadow)"/>
+  <text x="245" y="136" text-anchor="middle" style="font-family:system-ui,sans-serif;font-size:14px;font-weight:700;fill:#ffffff;">HTC Vive Focus Vision</text>
+  <text x="245" y="154" text-anchor="middle" style="font-family:system-ui,sans-serif;font-size:11px;fill:#e0e7ff;">Eye Tracker | 100 Hz | Gaze, Pupil, Openness</text>
+  <text x="245" y="168" text-anchor="middle" style="font-family:system-ui,sans-serif;font-size:10px;fill:#c7d2fe;">VIVE OpenXR API</text>
+
+  <!-- Plux OpenBAN -->
+  <rect x="470" y="110" width="370" height="66" rx="8" fill="url(#hwGrad)" filter="url(#shadow)"/>
+  <text x="655" y="136" text-anchor="middle" style="font-family:system-ui,sans-serif;font-size:14px;font-weight:700;fill:#ffffff;">Plux OpenBAN Sensor</text>
+  <text x="655" y="154" text-anchor="middle" style="font-family:system-ui,sans-serif;font-size:11px;fill:#e0e7ff;">EDA / GSR | 1000 Hz | ADC 0-65535</text>
+  <text x="655" y="168" text-anchor="middle" style="font-family:system-ui,sans-serif;font-size:10px;fill:#c7d2fe;">Bluetooth Connection</text>
+
+  <!-- Arrows from HW to Unity -->
+  <line x1="245" y1="176" x2="245" y2="216" stroke="#64748b" stroke-width="1.5" marker-end="url(#arrowGray)"/>
+  <line x1="655" y1="176" x2="655" y2="216" stroke="#64748b" stroke-width="1.5" marker-end="url(#arrowGray)"/>
+
+  <!-- ===== UNITY CLIENT LAYER ===== -->
+  <rect x="30" y="208" width="840" height="235" rx="10" fill="#f0f9ff" stroke="#7dd3fc" stroke-width="1.5" stroke-dasharray="6,3" filter="url(#shadow)"/>
+  <text x="50" y="230" style="font-family:system-ui,sans-serif;font-size:11px;font-weight:600;fill:#0284c7;text-transform:uppercase;letter-spacing:1px;">Unity Client (C#) - Unity 6000.3.10f1</text>
+
+  <!-- EyeTrackingDataCollector -->
+  <rect x="55" y="243" width="260" height="55" rx="8" fill="url(#unityGrad)" filter="url(#shadow)"/>
+  <text x="185" y="266" text-anchor="middle" style="font-family:system-ui,sans-serif;font-size:12px;font-weight:600;fill:#ffffff;">EyeTrackingDataCollector</text>
+  <text x="185" y="284" text-anchor="middle" style="font-family:system-ui,sans-serif;font-size:10px;fill:#bae6fd;">Fixation | Saccade | Microsaccade | Blink</text>
+
+  <!-- GSRDataCollector -->
+  <rect x="585" y="243" width="260" height="55" rx="8" fill="url(#unityGrad)" filter="url(#shadow)"/>
+  <text x="715" y="266" text-anchor="middle" style="font-family:system-ui,sans-serif;font-size:12px;font-weight:600;fill:#ffffff;">GSRDataCollector</text>
+  <text x="715" y="284" text-anchor="middle" style="font-family:system-ui,sans-serif;font-size:10px;fill:#bae6fd;">ADC Conversion | Filter | Peak Detection</text>
+
+  <!-- StressPredictor -->
+  <rect x="322" y="243" width="255" height="55" rx="8" fill="url(#unityGrad)" filter="url(#shadow)"/>
+  <text x="450" y="266" text-anchor="middle" style="font-family:system-ui,sans-serif;font-size:12px;font-weight:600;fill:#ffffff;">StressPredictor</text>
+  <text x="450" y="284" text-anchor="middle" style="font-family:system-ui,sans-serif;font-size:10px;fill:#bae6fd;">Feature Aggregation + WebSocket Client</text>
+
+  <!-- Internal arrows: collectors to predictor -->
+  <line x1="315" y1="270" x2="318" y2="270" stroke="#64748b" stroke-width="1.2" marker-end="url(#arrowGray)"/>
+  <line x1="581" y1="270" x2="577" y2="270" stroke="#64748b" stroke-width="1.2"/>
+  <polygon points="577,267 581,270 577,273" fill="#64748b"/>
+
+  <!-- Event labels on arrows -->
+  <text x="316" y="262" style="font-family:system-ui,sans-serif;font-size:8px;fill:#94a3b8;font-style:italic;">OnFeatures</text>
+  <text x="556" y="262" style="font-family:system-ui,sans-serif;font-size:8px;fill:#94a3b8;font-style:italic;">OnFeatures</text>
+
+  <!-- StressWarningHUD -->
+  <rect x="55" y="315" width="260" height="55" rx="8" fill="url(#unityGrad)" filter="url(#shadow)"/>
+  <text x="185" y="338" text-anchor="middle" style="font-family:system-ui,sans-serif;font-size:12px;font-weight:600;fill:#ffffff;">StressWarningHUD</text>
+  <text x="185" y="356" text-anchor="middle" style="font-family:system-ui,sans-serif;font-size:10px;fill:#bae6fd;">Head-Locked Vignette + Warning Text</text>
+
+  <!-- DataLogger -->
+  <rect x="585" y="315" width="260" height="55" rx="8" fill="url(#unityGrad)" filter="url(#shadow)"/>
+  <text x="715" y="338" text-anchor="middle" style="font-family:system-ui,sans-serif;font-size:12px;font-weight:600;fill:#ffffff;">DataLogger</text>
+  <text x="715" y="356" text-anchor="middle" style="font-family:system-ui,sans-serif;font-size:10px;fill:#bae6fd;">CSV Export (4 output files)</text>
+
+  <!-- Calibration box -->
+  <rect x="322" y="315" width="255" height="55" rx="8" fill="#dbeafe" stroke="#93c5fd" stroke-width="1"/>
+  <text x="450" y="336" text-anchor="middle" style="font-family:system-ui,sans-serif;font-size:11px;font-weight:600;fill:#1e40af;">Personal Calibration</text>
+  <text x="450" y="352" text-anchor="middle" style="font-family:system-ui,sans-serif;font-size:10px;fill:#3b82f6;">15s baseline capture</text>
+  <text x="450" y="364" text-anchor="middle" style="font-family:system-ui,sans-serif;font-size:10px;fill:#3b82f6;">Dynamic threshold: baseline + 0.15</text>
+
+  <!-- Arrows from predictor to HUD and Logger -->
+  <path d="M380 298 L380 325 L319 325" fill="none" stroke="#64748b" stroke-width="1.2" marker-end="url(#arrowGray)"/>
+  <path d="M520 298 L520 325 L581 325" fill="none" stroke="#64748b" stroke-width="1.2" marker-end="url(#arrowGray)"/>
+  <text x="335" y="320" style="font-family:system-ui,sans-serif;font-size:8px;fill:#94a3b8;font-style:italic;">OnPrediction</text>
+  <text x="530" y="320" style="font-family:system-ui,sans-serif;font-size:8px;fill:#94a3b8;font-style:italic;">OnPrediction</text>
+
+  <!-- User experience bar -->
+  <rect x="55" y="385" width="790" height="44" rx="6" fill="#eff6ff" stroke="#bfdbfe" stroke-width="1"/>
+  <text x="450" y="404" text-anchor="middle" style="font-family:system-ui,sans-serif;font-size:12px;font-weight:600;fill:#1d4ed8;">VR User Experience</text>
+  <text x="450" y="420" text-anchor="middle" style="font-family:system-ui,sans-serif;font-size:10px;fill:#3b82f6;">HMD + EDA sensor worn by user | Real-time stress overlay in VR view | "Biraz dinlenmelisin" warning</text>
+
+  <!-- ===== WEBSOCKET CHANNEL ===== -->
+  <rect x="310" y="455" width="280" height="36" rx="18" fill="url(#wsGrad)" filter="url(#shadow)"/>
+  <text x="450" y="478" text-anchor="middle" style="font-family:system-ui,sans-serif;font-size:13px;font-weight:700;fill:#ffffff;">WebSocket ws://localhost:8765</text>
+
+  <!-- Bidirectional arrows -->
+  <line x1="410" y1="443" x2="410" y2="451" stroke="#64748b" stroke-width="1.5" marker-end="url(#arrowGray)"/>
+  <line x1="490" y1="495" x2="490" y2="510" stroke="#64748b" stroke-width="1.5" marker-end="url(#arrowGray)"/>
+  <text x="415" y="448" style="font-family:system-ui,sans-serif;font-size:9px;fill:#94a3b8;">JSON {16 features}</text>
+  <text x="495" y="506" style="font-family:system-ui,sans-serif;font-size:9px;fill:#94a3b8;">JSON {stress, probability}</text>
+
+  <!-- ===== PYTHON ML SERVER ===== -->
+  <rect x="30" y="515" width="840" height="148" rx="10" fill="#f0fdf4" stroke="#86efac" stroke-width="1.5" stroke-dasharray="6,3" filter="url(#shadow)"/>
+  <text x="50" y="537" style="font-family:system-ui,sans-serif;font-size:11px;font-weight:600;fill:#059669;text-transform:uppercase;letter-spacing:1px;">Python ML Server</text>
+
+  <!-- Feature Processing -->
+  <rect x="55" y="548" width="280" height="100" rx="8" fill="url(#pyGrad)" filter="url(#shadow)"/>
+  <text x="195" y="572" text-anchor="middle" style="font-family:system-ui,sans-serif;font-size:13px;font-weight:700;fill:#ffffff;">Feature Processing</text>
+  <text x="195" y="590" text-anchor="middle" style="font-family:system-ui,sans-serif;font-size:10px;fill:#d1fae5;">Log Transformation (9 features)</text>
+  <text x="195" y="606" text-anchor="middle" style="font-family:system-ui,sans-serif;font-size:10px;fill:#d1fae5;">Missing Value Handling</text>
+  <text x="195" y="622" text-anchor="middle" style="font-family:system-ui,sans-serif;font-size:10px;fill:#d1fae5;">SMOTE Oversampling (training)</text>
+  <text x="195" y="638" text-anchor="middle" style="font-family:system-ui,sans-serif;font-size:10px;fill:#d1fae5;">16-Feature Input Vector</text>
+
+  <!-- Arrow -->
+  <line x1="339" y1="598" x2="380" y2="598" stroke="#64748b" stroke-width="1.5" marker-end="url(#arrowGray)"/>
+
+  <!-- LightGBM Stacking -->
+  <rect x="385" y="548" width="280" height="100" rx="8" fill="url(#pyGrad)" filter="url(#shadow)"/>
+  <text x="525" y="572" text-anchor="middle" style="font-family:system-ui,sans-serif;font-size:13px;font-weight:700;fill:#ffffff;">Stacking Classifier</text>
+  <text x="525" y="590" text-anchor="middle" style="font-family:system-ui,sans-serif;font-size:10px;fill:#d1fae5;">LightGBM (primary)</text>
+  <text x="525" y="606" text-anchor="middle" style="font-family:system-ui,sans-serif;font-size:10px;fill:#d1fae5;">Logistic Regression + SVM</text>
+  <text x="525" y="622" text-anchor="middle" style="font-family:system-ui,sans-serif;font-size:10px;fill:#d1fae5;">Binary: Stress / No-Stress</text>
+  <text x="525" y="638" text-anchor="middle" style="font-family:system-ui,sans-serif;font-size:10px;fill:#d1fae5;">Probability Output (0.0 - 1.0)</text>
+
+  <!-- Tech badges -->
+  <rect x="705" y="555" width="145" height="85" rx="8" fill="#dcfce7" stroke="#86efac" stroke-width="1"/>
+  <text x="778" y="575" text-anchor="middle" style="font-family:system-ui,sans-serif;font-size:10px;font-weight:600;fill:#166534;">Dependencies</text>
+  <text x="778" y="593" text-anchor="middle" style="font-family:system-ui,sans-serif;font-size:9px;fill:#15803d;">Python 3.8+</text>
+  <text x="778" y="607" text-anchor="middle" style="font-family:system-ui,sans-serif;font-size:9px;fill:#15803d;">websockets &gt;= 11.0</text>
+  <text x="778" y="621" text-anchor="middle" style="font-family:system-ui,sans-serif;font-size:9px;fill:#15803d;">lightgbm &gt;= 4.0</text>
+  <text x="778" y="635" text-anchor="middle" style="font-family:system-ui,sans-serif;font-size:9px;fill:#15803d;">scikit-learn &gt;= 1.2</text>
+</svg>
